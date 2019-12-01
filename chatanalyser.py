@@ -1,4 +1,4 @@
-with open("../_chat.txt", 'r') as file:
+with open("../../_chat.txt", 'r',encoding="utf8",errors="ignore") as file:
 	Mayankwords=0
 	Otherwords=0
 	for line in file:
