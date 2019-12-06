@@ -1,7 +1,7 @@
 import tweepy as tw
 
-auth = tw.OAuthHandler('V3I91nSyjRAGcCPRejuBm3KyL','eVdBFRRpVQ5tGntKmBMxwx5grHU4jqlE8hSUxurDSMB6dXCnRb')
-auth.set_access_token('7815702-Tl0AtqsyGwdflfMSOrnP0L8qyoV0OWekiTzPhq1Rlj','YL9EfnDQU4wRczn6VGoSLaTypFk6Fs3jxfoeaw8xCEvga')
+auth = tw.OAuthHandler('consumer_key','consumer_secret') #insert consumer_key and consumer_secret
+auth.set_access_token('access_token','access_token_secret') #insert access_token and access_token_secret
 api = tw.API(auth, wait_on_rate_limit=True)
 
 search_word = '#' + input("Please enter search keyword: ")
@@ -10,6 +10,6 @@ search_word = '#' + input("Please enter search keyword: ")
 date_since="2018-11-16"
 
 tweets = tw.Cursor(api.search,q=search_word,lang="en",since=date_since).items(10)
-
+print("showing results for 
 for tweet in tweets:
 	print(tweet.text)
