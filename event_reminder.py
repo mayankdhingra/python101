@@ -4,7 +4,8 @@ from datetime import datetime,date
 from io import StringIO
 
 
-#workbook = load_workbook(filename=r"C:\Users\MDD\Desktop\python101\data_1.xlsx") #filepath
+workbook = load_workbook(filename=r"C:\Users\MDD\Desktop\python101\data_1.xlsx") #filepath
+
 sheet = workbook.active
 
 birthday_count=0
@@ -65,3 +66,4 @@ print(f"message is {whatWasPrinted}")
 server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
 server.login("email id", "password") #email id and password
 server.sendmail("email id","receipient email id",whatWasPrinted)
+
