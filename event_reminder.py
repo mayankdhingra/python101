@@ -15,6 +15,9 @@ birthdays={}
 anniversaries={}
 kids_birthdays={}
 
+sender_email = "a@gmail.com"  # Enter your address
+receiver_email = "d@gmail.com"  # Enter receiver address
+
 old_stdout = sys.stdout # Memorize the default stdout stream
 result= StringIO()
 
@@ -58,12 +61,21 @@ for key in kids_birthdays:
 	print(key,'->',change_date_format(str(kids_birthdays[key].date())))
 print("\n")
 
+total_events = birthday_count + anniversary_count + kids_birthdays_count
 sys.stdout = old_stdout # Put the old stream back in place
-whatWasPrinted = "\n" + result.getvalue() # Return a str containing the entire contents of the buffer.
+message = """\
+Subject: This Month's Events (Birthdays, Anniversaries etc): """ + str(total_events) + """
+
+
+"""
+
+
+whatWasPrinted = message + result.getvalue() # Return a str containing the entire contents of the buffer.
 
 print(f"message is {whatWasPrinted}")
 
 server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
 server.login("email id", "password") #email id and password
-server.sendmail("email id","receipient email id",whatWasPrinted)
+#server.sendmail("email id","receipient email id",whatWasPrinted)
 
+server.sendmail(sender_email,receiver_email,whatWasPrinted)
