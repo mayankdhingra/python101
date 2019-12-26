@@ -14,9 +14,17 @@ kids_birthdays_count=0
 birthdays={}
 anniversaries={}
 kids_birthdays={}
+next_month_birthday_count = 0
+next_month_anniversary_count=0
+next_month_kids_birthdays_count=0
+next_month_birthdays={}
+next_month_anniversaries={}
+next_month_kids_birthdays={}
+#months=['1':'Jan',]
 
 sender_email = "a@gmail.com"  # Enter your address
 receiver_email = "d@gmail.com"  # Enter receiver address
+
 
 old_stdout = sys.stdout # Memorize the default stdout stream
 result= StringIO()
@@ -31,37 +39,91 @@ for value in sheet.iter_rows(min_row=2,min_col=1,values_only=True):
 		if(value[2].date().month==date.today().month):
 			birthday_count+=1
 			birthdays.update({value[0]:value[2]})
-	
+		if(date.today().month==12):
+			if(value[2].date().month==1):
+				next_month_birthday_count+=1
+				next_month_birthdays.update({value[0]:value[2]})
+		else:
+			print("here")
+			if(value[2].date().month==date.today().month+1):
+				next_month_birthday_count+=1
+				next_month_birthdays.update({value[0]:value[2]})
+
 
 	if(isinstance(value[3],datetime)):
 		if(value[3].date().month==date.today().month):
 			anniversary_count+=1
 			anniversaries.update({value[0]:value[3]})
 
+		if(date.today().month==12):
+			if(value[3].date().month==1):
+				next_month_birthday_count+=1
+				next_month_birthdays.update({value[0]:value[3]})
+		else:
+			if(value[3].date().month==date.today().month+1):
+				next_month_birthday_count+=1
+				next_month_birthdays.update({value[0]:value[3]})
+
 	if(isinstance(value[4],datetime)):
 		if(value[4].date().month==date.today().month):
 			kids_birthdays_count+=1
 			kids_birthdays.update({value[0]:value[4]})
 
+		if(date.today().month==12):
+			if(value[4].date().month==1):
+				next_month_birthday_count+=1
+				next_month_birthdays.update({value[0]:value[4]})
+		else:
+			print("here")
+			if(value[4].date().month==date.today().month+1):
+				next_month_birthday_count+=1
+				next_month_birthdays.update({value[0]:value[4]})
 
-birthdays=dict(sorted(birthdays.items(), key=operator.itemgetter(0)))
-print(f"This month has {birthday_count} birthdays,")
+print(f"This Month has {birthday_count} birthdays, {anniversary_count} anniversaries & {kids_birthdays_count} kids birthdays \n")
+
+birthdays=dict(sorted(birthdays.items(), key=operator.itemgetter(1)))
+print(f"This month has {birthday_count} birthdays: \n")
 for key in birthdays:
 	print(key,'->',change_date_format(str(birthdays[key].date())))
 	b_message = str(key) + "->" 
 print("\n")
-anniversaries=dict(sorted(anniversaries.items(), key=operator.itemgetter(0)))
-print(f"This month has {anniversary_count} anniversaries,")
+
+anniversaries=dict(sorted(anniversaries.items(), key=operator.itemgetter(1)))
+print(f"This month has {anniversary_count} anniversaries: \n")
 for key in anniversaries:
 	print(key,'->',change_date_format(str(anniversaries[key].date())))
 print("\n")
-kids_birthdays=dict(sorted(kids_birthdays.items(), key=operator.itemgetter(0)))
-print(f"This month has {kids_birthdays_count} kids_birthdays,")
+
+kids_birthdays=dict(sorted(kids_birthdays.items(), key=operator.itemgetter(1)))
+print(f"This month has {kids_birthdays_count} kids birthdays: \n")
 for key in kids_birthdays:
 	print(key,'->',change_date_format(str(kids_birthdays[key].date())))
 print("\n")
 
+print(f"Next Month has {next_month_birthday_count} birthdays, {next_month_anniversary_count} anniversaries & {next_month_kids_birthdays_count} kids birthdays \n")
+
+next_month_birthdays=dict(sorted(next_month_birthdays.items(), key=operator.itemgetter(1)))
+print(f"Next month has {next_month_birthday_count} birthdays: \n")
+for key in next_month_birthdays:
+	print(key,'->',change_date_format(str(next_month_birthdays[key].date())))
+	b_message = str(key) + "->" 
+print("\n")
+
+next_month_anniversaries=dict(sorted(next_month_anniversaries.items(), key=operator.itemgetter(1)))
+print(f"Next month has {next_month_anniversary_count} anniversaries: \n")
+for key in next_month_anniversaries:
+	print(key,'->',change_date_format(str(next_month_anniversaries[key].date())))
+print("\n")
+
+next_month_kids_birthdays=dict(sorted(next_month_kids_birthdays.items(), key=operator.itemgetter(1)))
+print(f"Next month has {next_month_kids_birthdays_count} kids birthdays: \n")
+for key in next_month_kids_birthdays:
+	print(key,'->',change_date_format(str(next_month_kids_birthdays[key].date())))
+print("\n")
+
 total_events = birthday_count + anniversary_count + kids_birthdays_count
+next_month_total_events= next_month_birthday_count + next_month_anniversary_count + next_month_kids_birthdays_count
+
 sys.stdout = old_stdout # Put the old stream back in place
 message = """\
 Subject: This Month's Events (Birthdays, Anniversaries etc): """ + str(total_events) + """
