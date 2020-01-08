@@ -1,6 +1,6 @@
 from openpyxl import load_workbook
 
-workbook = load_workbook(filename=r"C:\Users\Shuttl\Desktop\Python\python101\income_level.xlsx")
+workbook = load_workbook(filename=r"C:\Users\Desktop\python101\income_level.xlsx")
 
 sheet = workbook.active
 
