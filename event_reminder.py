@@ -164,6 +164,5 @@ whatWasPrinted = message + result.getvalue() # Return a str containing the entir
 print(f"message is {whatWasPrinted}")
 
 server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
-#server.login("email id", "password") #email id and password
-#server.sendmail("email id","receipient email id",whatWasPrinted)
-#server.sendmail(sender_email,receiver_email,whatWasPrinted)
+server.login("email id", "password") #email id and password
+server.sendmail(sender_email,receiver_email,whatWasPrinted)
