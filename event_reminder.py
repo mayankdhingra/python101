@@ -6,6 +6,7 @@ from io import StringIO
 
 workbook = load_workbook(filename=r"C:\Users\MDD\Desktop\python101\data_1.xlsx") #filepath
 
+
 sheet = workbook.active
 
 birthday_count=0
@@ -57,7 +58,7 @@ for value in sheet.iter_rows(min_row=2,min_col=1,values_only=True):
 			event_this_week_or_not=is_event_this_week(date.today(),value[2].date())
 			if event_this_week_or_not:
 				this_weeks_birthday_count+=1
-				#this_weeks_birthdays.update({value[0]:value[2]})
+				this_weeks_birthdays.update({value[0]:value[2]})
 			birthday_count+=1
 			birthdays.update({value[0]:value[2]})
 		if(date.today().month==12):
@@ -101,9 +102,14 @@ for value in sheet.iter_rows(min_row=2,min_col=1,values_only=True):
 				next_month_birthdays.update({value[0]:value[4]})
 
 #print(f"This Month has {birthday_count} birthdays, {anniversary_count} anniversaries & {kids_birthdays_count} kids birthdays \n")
+this_weeks_birthdays=dict(sorted(this_weeks_birthdays.items(), key=operator.itemgetter(1)))
 if this_weeks_birthday_count:
 	print(f"This week has {this_weeks_birthday_count} birthdays \n")
-	
+	for key in this_weeks_birthdays:
+		print(key,'->',change_date_format(str(this_weeks_birthdays[key].date())))
+		b_message = str(key) + "->" 
+	print("\n")
+
 birthdays=dict(sorted(birthdays.items(), key=operator.itemgetter(1)))
 print(f"This month has {birthday_count} birthdays: \n")
 for key in birthdays:
