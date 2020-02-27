@@ -4,7 +4,8 @@ from datetime import datetime,date
 from io import StringIO
 
 
-workbook = load_workbook(filename=r"C:\Users\MDD\Desktop\python101\data_1.xlsx") #filepath
+#workbook = load_workbook(filename=r"C:\Users\MDD\Desktop\python101\data_1.xlsx") #filepath
+workbook = load_workbook(filename=r"/Users/mayankdhingra/Documents/python/python101/data_1.xlsx") #filepath
 
 
 sheet = workbook.active
@@ -252,7 +253,7 @@ total_events = birthday_count + anniversary_count + kids_birthdays_count
 next_month_total_events= next_month_birthday_count + next_month_anniversary_count + next_month_kids_birthdays_count
 
 sys.stdout = old_stdout # Put the old stream back in place
-this_weeks_total_events = this_weeks_kids_birthdays_count+this_weeks_anniversary_count+this_weeks_kids_birthdays_count
+this_weeks_total_events = this_weeks_birthday_count+this_weeks_anniversary_count+this_weeks_kids_birthdays_count
 #next_weeks_total_events = next_weeks_kids_birthdays_count+next_weeks_anniversary_count+next_weeks_kids_birthdays_count
 
 if this_weeks_total_events:
