@@ -4,8 +4,7 @@ from datetime import datetime,date
 from io import StringIO
 
 
-#workbook = load_workbook(filename=r"C:\Users\MDD\Desktop\python101\data_1.xlsx") #filepath
-workbook = load_workbook(filename=r"/Users/mayankdhingra/Documents/python/python101/data_1.xlsx") #filepath
+workbook = load_workbook(filename=r"C:\Users\MDD\Desktop\python101\data_1.xlsx") #filepath
 
 
 sheet = workbook.active
@@ -265,7 +264,7 @@ if this_weeks_total_events:
 	print(f"message is {whatWasPrinted}")
 
 	server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
-	#server.login("email id", "password") #email id and password
-	#server.sendmail(sender_email,receiver_email,whatWasPrinted)
+	server.login("email id", "password") #email id and password
+	server.sendmail(sender_email,receiver_email,whatWasPrinted)
 else:
 	print("No events this week")
