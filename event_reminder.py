@@ -6,6 +6,7 @@ from io import StringIO
 
 workbook = load_workbook(filename=r"C:\Users\MDD\Desktop\python101\data_1.xlsx") #filepath
 
+
 sheet = workbook.active
 
 birthday_count=0
@@ -251,17 +252,19 @@ total_events = birthday_count + anniversary_count + kids_birthdays_count
 next_month_total_events= next_month_birthday_count + next_month_anniversary_count + next_month_kids_birthdays_count
 
 sys.stdout = old_stdout # Put the old stream back in place
-message = """\
-Subject: This Month's Events (Birthdays, Anniversaries etc): """ + str(total_events) + """
+this_weeks_total_events = this_weeks_kids_birthdays_count+this_weeks_anniversary_count+this_weeks_kids_birthdays_count
+#next_weeks_total_events = next_weeks_kids_birthdays_count+next_weeks_anniversary_count+next_weeks_kids_birthdays_count
 
+if this_weeks_total_events:
+	message = """\
+	Subject: This Week's Events (Birthdays, Anniversaries etc): """ + str(this_weeks_total_events) + """
+	"""
+	whatWasPrinted = message + result.getvalue() # Return a str containing the entire contents of the buffer.
 
-"""
+	print(f"message is {whatWasPrinted}")
 
-
-whatWasPrinted = message + result.getvalue() # Return a str containing the entire contents of the buffer.
-
-print(f"message is {whatWasPrinted}")
-
-server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
-server.login("email id", "password") #email id and password
-server.sendmail(sender_email,receiver_email,whatWasPrinted)
+	server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+	#server.login("email id", "password") #email id and password
+	#server.sendmail(sender_email,receiver_email,whatWasPrinted)
+else:
+	print("No events this week")
