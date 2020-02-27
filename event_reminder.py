@@ -6,7 +6,6 @@ from io import StringIO
 
 workbook = load_workbook(filename=r"C:\Users\MDD\Desktop\python101\data_1.xlsx") #filepath
 
-
 sheet = workbook.active
 
 birthday_count=0
@@ -54,8 +53,8 @@ def is_event_this_week(date_today,date_event):
 	map_next_week={0:[7,13],1:[6,12],2:[5,11],3:[4,10],4:[3,9],5:[2,8],6:[1,7]}
 	this_week_range=map_this_week[day_today]
 	next_week_range=map_next_week[day_today]
-	#print(day_today,date_today,day_since,date_event)
-	if(day_since>=this_week_range[0] and day_since<=this_week_range[1]):
+	print(day_today,date_today,day_since,date_event)
+	if(day_since>=0 and day_since<=this_week_range[1]): #only return value if there are pending events in this week
 		return 'ThisWeek'
 	else:
 		if(day_since>=next_week_range[0] and day_since<=next_week_range[1]):
@@ -254,7 +253,7 @@ next_month_total_events= next_month_birthday_count + next_month_anniversary_coun
 sys.stdout = old_stdout # Put the old stream back in place
 this_weeks_total_events = this_weeks_birthday_count+this_weeks_anniversary_count+this_weeks_kids_birthdays_count
 #next_weeks_total_events = next_weeks_kids_birthdays_count+next_weeks_anniversary_count+next_weeks_kids_birthdays_count
-
+#print(this_weeks_birthdays)
 if this_weeks_total_events:
 	message = """\
 	Subject: This Week's Events (Birthdays, Anniversaries etc): """ + str(this_weeks_total_events) + """
