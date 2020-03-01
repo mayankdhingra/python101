@@ -272,7 +272,7 @@ if this_weeks_total_events:
 	print(f"message is {whatWasPrinted}")
 
 	server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
-	#server.login("email id", "password") #email id and password
-	#server.sendmail(sender_email,receiver_email,whatWasPrinted)
+	server.login("email id", "password") #email id and password
+	server.sendmail(sender_email,receiver_email,whatWasPrinted)
 else:
 	print("No events this week")
