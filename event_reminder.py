@@ -53,7 +53,7 @@ def is_event_this_week(date_today,date_event):
 	map_next_week={0:[7,13],1:[6,12],2:[5,11],3:[4,10],4:[3,9],5:[2,8],6:[1,7]}
 	this_week_range=map_this_week[day_today]
 	next_week_range=map_next_week[day_today]
-	print(day_today,date_today,day_since,date_event)
+	#print(date_event,day_today,date_today,day_since,this_week_range,next_week_range)
 	if(day_since>=0 and day_since<=this_week_range[1]): #only return value if there are pending events in this week
 		return 'ThisWeek'
 	else:
@@ -70,6 +70,9 @@ for value in sheet.iter_rows(min_row=2,min_col=1,values_only=True):
 			if event_this_week_or_not=='ThisWeek':
 				this_weeks_birthday_count+=1
 				this_weeks_birthdays.update({value[0]:value[2]})
+			elif event_this_week_or_not=='NextWeek':
+				next_weeks_birthday_count+=1
+				next_weeks_birthdays.update({value[0]:value[2]})
 			birthday_count+=1
 			birthdays.update({value[0]:value[2]})
 		if(date.today().month==12): #handling december month
@@ -90,9 +93,12 @@ for value in sheet.iter_rows(min_row=2,min_col=1,values_only=True):
 	if(isinstance(value[3],datetime)): #to check if anniverary column has values
 		if(value[3].date().month==date.today().month):
 			event_this_week_or_not=is_event_this_week(date.today(),value[3].date())
-			if event_this_week_or_not:
+			if event_this_week_or_not=='ThisWeek':
 				this_weeks_anniversary_count+=1
 				this_weeks_anniversaries.update({value[0]:value[3]})
+			elif event_this_week_or_not=='NextWeek':
+				next_weeks_anniversary_count+=1
+				next_weeks_anniversaries.update({value[0]:value[3]})
 			anniversary_count+=1
 			anniversaries.update({value[0]:value[3]})
 
@@ -108,9 +114,12 @@ for value in sheet.iter_rows(min_row=2,min_col=1,values_only=True):
 	if(isinstance(value[4],datetime)): #to check if kids birthdays column has values
 		if(value[4].date().month==date.today().month):
 			event_this_week_or_not=is_event_this_week(date.today(),value[4].date())
-			if event_this_week_or_not:
+			if event_this_week_or_not=='ThisWeek':
 				this_weeks_kids_birthdays_count+=1
 				this_weeks_kids_birthdays.update({value[0]:value[4]})
+			elif event_this_week_or_not=='NextWeek':
+				next_weeks_kids_birthdays_count+=1
+				next_weeks_kids_birthdays.update({value[0]:value[4]})
 			kids_birthdays_count+=1
 			kids_birthdays.update({value[0]:value[4]})
 
@@ -263,7 +272,7 @@ if this_weeks_total_events:
 	print(f"message is {whatWasPrinted}")
 
 	server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
-	server.login("email id", "password") #email id and password
-	server.sendmail(sender_email,receiver_email,whatWasPrinted)
+	#server.login("email id", "password") #email id and password
+	#server.sendmail(sender_email,receiver_email,whatWasPrinted)
 else:
 	print("No events this week")
