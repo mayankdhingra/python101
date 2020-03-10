@@ -213,8 +213,8 @@ print("---------------------------------------------------")
 print("\n")
 
 birthdays=dict(sorted(birthdays.items(), key=operator.itemgetter(1)))
-if birthday_count:
-	print(f"This month has {birthday_count} birthdays: \n")
+if birthday_count-this_weeks_birthday_count-next_weeks_birthday_count:
+	print(f"This month had {birthday_count-this_weeks_birthday_count-next_weeks_birthday_count} birthdays in the past week(s): \n")
 	for key in birthdays:
 		print(key,'->',change_date_format(str(birthdays[key].date())))
 		b_message = str(key) + "->" 
